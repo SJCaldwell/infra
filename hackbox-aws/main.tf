@@ -31,14 +31,14 @@ data "http" "myip" {
 resource "aws_security_group" "ssh_admin" {
   name        = "ssh_admin"
   description = "Allow machine running terraform to ssh into new server"
-  vpc_id      = aws_default_vpc.default.id 
+  vpc_id      = aws_default_vpc.default.id
 
   ingress {
     description = "from the admin"
     from_port   = 0
     to_port     = 22
     protocol    = "tcp"
-    cidr_blocks = ["${chomp(data.http.myip.body)}/32"] 
+    cidr_blocks = ["${chomp(data.http.myip.body)}/32"]
   }
 
   egress {
